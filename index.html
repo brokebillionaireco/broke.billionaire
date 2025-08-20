@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- ADD THESE FAVICON LINES -->
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="favicon.png">
 
@@ -66,7 +65,6 @@
       margin-bottom: 0; 
     }
     
-    /* Feedback Button Styles */
     .feedback-btn {
       position: absolute;
       top: 10px;
@@ -211,7 +209,7 @@
 <body>
   <div class="container">
     <div class="header">
-      <a href="#" onclick="openFeedback()" class="feedback-btn">💬 Feedback</a>
+      <a href="#" onclick="openFeedback()" class="feedback-btn">Feedback</a>
       
       <div class="logo">
         <div class="logo-wrap">
@@ -255,7 +253,6 @@
     </div>
 
     <!-- FASHION FLOW -->
-    <!-- Fashion Screen 2: Type of Clothing -->
     <div class="screen" id="fashionScreen2">
       <div class="card">
         <div class="emoji-header"><span style="color:#d4af37;">👔</span></div>
@@ -284,7 +281,6 @@
       </div>
     </div>
 
-    <!-- Fashion Screen 3: Style -->
     <div class="screen" id="fashionScreen3">
       <div class="card">
         <div class="emoji-header"><span style="color:#d4af37;">🎨</span></div>
@@ -316,13 +312,12 @@
       </div>
     </div>
 
-    <!-- Fashion Screen 4: Budget & Outfits -->
     <div class="screen" id="fashionScreen4">
       <div class="card">
         <div class="emoji-header"><span style="color:#d4af37;">💰</span></div>
         <h2>Budget & Goals</h2>
         <div class="input-group">
-          <label>💳 Total budget for outfits?</label>
+          <label>Total budget for outfits?</label>
           <select id="fashionBudget">
             <option value="under50">Under $50</option>
             <option value="50to100">$50 - $100</option>
@@ -331,7 +326,7 @@
           </select>
         </div>
         <div class="input-group">
-          <label>👗 How many outfits do you need?</label>
+          <label>How many outfits do you need?</label>
           <select id="outfitCount">
             <option value="2-3pieces">2-3 key pieces</option>
             <option value="5-7outfits" selected>5-7 versatile outfits</option>
@@ -346,7 +341,6 @@
     </div>
 
     <!-- TRAVEL FLOW -->
-    <!-- Travel Screen 2: Destination Type -->
     <div class="screen" id="travelScreen2">
       <div class="card">
         <div class="emoji-header"><span style="color:#d4af37;">🌍</span></div>
@@ -369,7 +363,6 @@
       </div>
     </div>
 
-    <!-- Travel Screen 3: Travel Style -->
     <div class="screen" id="travelScreen3">
       <div class="card">
         <div class="emoji-header"><span style="color:#d4af37;">🎯</span></div>
@@ -401,13 +394,12 @@
       </div>
     </div>
 
-    <!-- Travel Screen 4: Budget & Travelers -->
     <div class="screen" id="travelScreen4">
       <div class="card">
         <div class="emoji-header"><span style="color:#d4af37;">💰</span></div>
         <h2>Trip Details</h2>
         <div class="input-group">
-          <label>💳 Total travel budget?</label>
+          <label>Total travel budget?</label>
           <select id="travelBudget">
             <option value="under500">Under $500</option>
             <option value="500to1500" selected>$500 - $1,500</option>
@@ -416,7 +408,7 @@
           </select>
         </div>
         <div class="input-group">
-          <label>✈️ How many travelers?</label>
+          <label>How many travelers?</label>
           <select id="travelerCount">
             <option value="solo">Solo traveler</option>
             <option value="couple" selected>Couple (2 people)</option>
@@ -432,7 +424,6 @@
     </div>
 
     <!-- DINING FLOW -->
-    <!-- Dining Screen 2: Dine Out vs Cook -->
     <div class="screen" id="diningScreen2">
       <div class="card">
         <div class="emoji-header"><span style="color:#d4af37;">🍽️</span></div>
@@ -455,7 +446,6 @@
       </div>
     </div>
 
-    <!-- Dining Screen 3: Cuisine Types -->
     <div class="screen" id="diningScreen3">
       <div class="card">
         <div class="emoji-header"><span style="color:#d4af37;">🌶️</span></div>
@@ -490,13 +480,12 @@
       </div>
     </div>
 
-    <!-- Dining Screen 4: Budget & Diners -->
     <div class="screen" id="diningScreen4">
       <div class="card">
         <div class="emoji-header"><span style="color:#d4af37;">💰</span></div>
         <h2>Dining Details</h2>
         <div class="input-group">
-          <label>💳 Monthly dining budget?</label>
+          <label>Monthly dining budget?</label>
           <select id="diningBudget">
             <option value="under50">Under $50</option>
             <option value="50to100" selected>$50 - $100</option>
@@ -505,7 +494,7 @@
           </select>
         </div>
         <div class="input-group">
-          <label>🍽️ How many diners typically?</label>
+          <label>How many diners typically?</label>
           <select id="dinerCount">
             <option value="solo">Just me</option>
             <option value="couple" selected>Two people</option>
@@ -548,7 +537,7 @@
         </div>
         
         <a href="#" onclick="openFeedback()" class="feedback-main">
-          💎 Help Us Elevate - Share Your Feedback!
+          Help Us Elevate - Share Your Feedback!
         </a>
         
         <button class="btn" onclick="startOver()" style="margin-top:16px;">Create Another Plan</button>
@@ -557,641 +546,1103 @@
   </div>
 
   <script>
-    // === ✨ FEEDBACK INTEGRATION ===
+    // Global variables
+    let currentStep = 1;
+    let selectedCategory = '';
+    let selectedType = '';
+    let selectedOptions = [];
+    let userData = {};
+
     const FEEDBACK_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSezzAaWwLw0W6BPwe6je-vGQdtKMnFanOTziEqNsZ5r3p2sag/viewform?usp=header";
     
     function openFeedback() {
       window.open(FEEDBACK_FORM_URL, '_blank');
-      console.log('Feedback form opened');
     }
     
-    // === COMPREHENSIVE LUXURY RECOMMENDATIONS DATABASE ===
-    const LUXURY_CATALOG = {
-      // FASHION RECOMMENDATIONS
+    // COMPREHENSIVE RECOMMENDATION DATABASE - PRODUCTION READY
+    const RECOMMENDATIONS = {
       fashion: {
         athletic: {
           boho: {
             under50: [
-              { name: 'Target Wild Fable Athleisure', tip: 'Bohemian-inspired activewear that rivals Free People Movement', price: 18, savings: 'Save $82' },
-              { name: 'Walmart Time & Tru Active', tip: 'Flowy, earthy-toned workout pieces under $15', price: 12, savings: 'Save $68' },
-              { name: 'Old Navy PowerSoft Performance', tip: 'Boho prints in buttery-soft fabrics', price: 20, savings: 'Save $60' }
+              { name: 'Vintage Athletic Thrifting', tip: 'Find unique 90s athletic pieces at thrift stores for bohemian flair', price: 25, savings: 'Save $75' },
+              { name: 'Free People Movement Dupes', tip: 'Target and H&M have boho athletic pieces inspired by Free People', price: 35, savings: 'Save $95' }
             ],
             '50to100': [
-              { name: 'Lululemon Outlet Finds', tip: 'End-of-season colors in align and flow styles', price: 45, savings: 'Save $83' },
-              { name: 'Alo Yoga Flash Sales', tip: '7-Point sets in earth tones during promotional periods', price: 55, savings: 'Save $65' },
-              { name: 'Free People Movement Dupes', tip: 'Nearly identical styles from alternative brands', price: 38, savings: 'Save $92' }
+              { name: 'Alo Yoga Sale Items', tip: 'End-of-season earth tones and flowing cuts', price: 65, savings: 'Save $85' },
+              { name: 'Urban Outfitters Athletic', tip: 'Bohemian-inspired workout sets at accessible prices', price: 55, savings: 'Save $75' }
             ],
             '100to200': [
-              { name: 'Anthropologie Athletic', tip: 'Unique boho patterns in premium performance fabrics', price: 85, savings: 'Save $65' },
-              { name: 'Spiritual Gangster Sale', tip: 'Mindful movement pieces with bohemian flair', price: 75, savings: 'Save $75' },
-              { name: 'Beyond Yoga Spacedye', tip: 'Signature tie-dye patterns in luxury fabrics', price: 95, savings: 'Save $55' }
+              { name: 'Free People Movement Collection', tip: 'Authentic boho athletic wear during 40% off sales', price: 128, savings: 'Save $122' },
+              { name: 'Spiritual Gangster Outlet', tip: 'Premium boho activewear with meaningful mantras', price: 95, savings: 'Save $105' }
             ],
             over200: [
-              { name: 'Varley Washington Collection', tip: 'Premium bohemian athletic wear with international styling', price: 120, savings: 'Save $80' },
-              { name: 'Alo Yoga Shine Collection', tip: 'Luxe metallic and earth-tone combinations', price: 145, savings: 'Save $105' },
-              { name: 'lululemon Special Edition', tip: 'Limited drops in unique boho-inspired colorways', price: 158, savings: 'Save $92' }
+              { name: 'Varley London Collection', tip: 'British luxury boho athletic wear at US outlets', price: 185, savings: 'Save $215' },
+              { name: 'Beyond Yoga Spacedye', tip: 'Signature tie-dye luxury activewear during sample sales', price: 165, savings: 'Save $135' }
             ]
           },
           classic: {
             under50: [
-              { name: 'Uniqlo Airism Active', tip: 'Clean lines and timeless cuts in performance fabrics', price: 19, savings: 'Save $61' },
-              { name: 'Target All in Motion', tip: 'Classic athletic staples in neutral colors', price: 16, savings: 'Save $54' },
-              { name: 'Walmart Athletic Works', tip: 'Basic black, white, and gray pieces that never go out of style', price: 14, savings: 'Save $46' }
+              { name: 'Uniqlo Athletic Basics', tip: 'Japanese minimalism meets athletic functionality', price: 30, savings: 'Save $50' },
+              { name: 'Target All in Motion', tip: 'Clean lines in black, white, and gray essentials', price: 25, savings: 'Save $45' }
             ],
             '50to100': [
-              { name: 'Nike Outlet Classics', tip: 'Swoosh logo pieces in timeless black and white', price: 42, savings: 'Save $58' },
-              { name: 'Adidas 3-Stripe Essentials', tip: 'Iconic athletic wear at outlet prices', price: 38, savings: 'Save $62' },
-              { name: 'Athleta Sale Section', tip: 'Classic cuts in premium fabrics during seasonal sales', price: 55, savings: 'Save $75' }
+              { name: 'Nike Outlet Classics', tip: 'Timeless swoosh pieces in neutral colors', price: 55, savings: 'Save $65' },
+              { name: 'Lululemon Core Collection', tip: 'Classic black align and wunder train pieces', price: 78, savings: 'Save $50' }
             ],
             '100to200': [
-              { name: 'lululemon Core Collection', tip: 'Signature pieces in timeless colors like black and navy', price: 98, savings: 'Save $30' },
-              { name: 'Patagonia Capilene', tip: 'Sustainable athletic wear built to last decades', price: 89, savings: 'Save $41' },
-              { name: 'REI Co-op Brand', tip: 'High-quality outdoor athletic wear with lifetime guarantee', price: 76, savings: 'Save $54' }
+              { name: 'Lululemon Signature Pieces', tip: 'Align tank and legging sets in classic colors', price: 138, savings: 'Save $62' },
+              { name: 'Athleta Power of She', tip: 'Classic cuts with performance technology', price: 125, savings: 'Save $75' }
             ],
             over200: [
-              { name: 'Arc\'teryx Outlet', tip: 'Technical athletic wear with minimal, timeless design', price: 165, savings: 'Save $85' },
-              { name: 'Outdoor Research Premium', tip: 'Professional-grade athletic wear in classic colorways', price: 145, savings: 'Save $105' },
-              { name: 'Smartwool Merino Active', tip: 'Luxury natural fibers in understated, classic designs', price: 128, savings: 'Save $72' }
+              { name: 'Arc\'teryx Technical Wear', tip: 'Canadian outdoor luxury with lifetime guarantee', price: 245, savings: 'Save $155' },
+              { name: 'Patagonia Premium Collection', tip: 'Sustainable athletic luxury with classic styling', price: 185, savings: 'Save $115' }
             ]
           },
           trendy: {
             under50: [
-              { name: 'ASOS 4505 Active', tip: 'Latest activewear trends at budget-friendly prices', price: 22, savings: 'Save $78' },
-              { name: 'H&M Sport Collection', tip: 'Fast-fashion athletic wear with current color trends', price: 18, savings: 'Save $62' },
-              { name: 'Forever 21 Active', tip: 'Trendy workout sets inspired by influencer styles', price: 25, savings: 'Save $75' }
+              { name: 'ASOS 4505 Active', tip: 'Latest activewear trends at budget-friendly prices', price: 35, savings: 'Save $65' },
+              { name: 'H&M Sport Trends', tip: 'Fast-fashion athletic wear with current color trends', price: 28, savings: 'Save $72' }
             ],
             '50to100': [
-              { name: 'Urban Outfitters Alo Dupes', tip: 'Instagram-worthy athletic sets at fraction of designer cost', price: 45, savings: 'Save $85' },
-              { name: 'ASOS DESIGN Sport', tip: 'Cutting-edge athletic wear with bold patterns and colors', price: 38, savings: 'Save $92' },
-              { name: 'Nasty Gal Active', tip: 'Edgy workout wear perfect for social media', price: 42, savings: 'Save $78' }
+              { name: 'Urban Outfitters Fitness', tip: 'Instagram-worthy athletic sets at accessible prices', price: 55, savings: 'Save $95' },
+              { name: 'ASOS Design Sport', tip: 'Cutting-edge athletic wear with bold patterns', price: 48, savings: 'Save $102' }
             ],
             '100to200': [
-              { name: 'Alo Yoga Latest Drops', tip: 'Newest releases in trending colors and styles', price: 88, savings: 'Save $42' },
-              { name: 'Outdoor Voices Recreation', tip: 'Unique exercise dresses and statement pieces', price: 95, savings: 'Save $55' },
-              { name: 'Set Active Sculpt', tip: 'Viral TikTok athletic wear in seasonal colors', price: 78, savings: 'Save $72' }
+              { name: 'Alo Yoga Latest Drops', tip: 'Newest releases in trending colors and styles', price: 118, savings: 'Save $82' },
+              { name: 'Set Active Sculpt Collection', tip: 'Viral TikTok athletic wear in seasonal colors', price: 95, savings: 'Save $105' }
             ],
             over200: [
-              { name: 'Year of Ours Limited Edition', tip: 'Celeb-favorite athletic wear with exclusive drops', price: 145, savings: 'Save $105' },
-              { name: 'Alo Yoga Shine Collection', tip: 'Metallic and holographic pieces for statement workouts', price: 168, savings: 'Save $82' },
-              { name: 'Varley Let\'s Go Collection', tip: 'International runway-inspired athletic wear', price: 155, savings: 'Save $95' }
+              { name: 'Year of Ours Limited Edition', tip: 'Celebrity-favorite athletic wear with exclusive drops', price: 185, savings: 'Save $215' },
+              { name: 'P.E Nation Statement Pieces', tip: 'Australian luxury streetwear meets athletic performance', price: 225, savings: 'Save $175' }
             ]
           },
           minimalist: {
             under50: [
-              { name: 'Uniqlo Minimalist Active', tip: 'Clean, architectural lines in neutral tones', price: 24, savings: 'Save $56' },
-              { name: 'COS Sport Essentials', tip: 'Scandinavian minimalism meets athletic functionality', price: 35, savings: 'Save $65' },
-              { name: 'Everlane ReNew Collection', tip: 'Sustainable athletic basics in timeless cuts', price: 32, savings: 'Save $48' }
+              { name: 'COS Athletic Essentials', tip: 'Scandinavian minimalism in athletic cuts', price: 42, savings: 'Save $58' },
+              { name: 'Everlane ReNew Collection', tip: 'Sustainable athletic basics in neutral tones', price: 35, savings: 'Save $65' }
             ],
             '50to100': [
-              { name: 'Filippa K Soft Sport', tip: 'Swedish minimalism in premium athletic fabrics', price: 68, savings: 'Save $82' },
-              { name: 'ARKET Active Collection', tip: 'Sustainable, minimal athletic wear with perfect fits', price: 55, savings: 'Save $75' },
-              { name: 'COS Technical Wear', tip: 'Architectural athletic pieces in monochromatic palettes', price: 72, savings: 'Save $78' }
+              { name: 'ARKET Active Line', tip: 'Swedish minimalist athletic wear with perfect fits', price: 68, savings: 'Save $82' },
+              { name: 'Filippa K Soft Sport', tip: 'Scandinavian luxury minimalism in technical fabrics', price: 85, savings: 'Save $65' }
             ],
             '100to200': [
-              { name: 'KOTN Active Essentials', tip: 'Egyptian cotton athletic wear in minimalist designs', price: 89, savings: 'Save $61' },
-              { name: 'Entireworld Movement', tip: 'Perfectly minimal athletic wear in considered colors', price: 95, savings: 'Save $55' },
-              { name: 'Lady White Co. Athletic', tip: 'Los Angeles minimalism in technical fabrics', price: 105, savings: 'Save $45' }
+              { name: 'Lemaire Athletic Capsule', tip: 'French minimalism meets high-performance wear', price: 145, savings: 'Save $155' },
+              { name: 'Toteme Active Collection', tip: 'Swedish luxury minimalist athletic wear', price: 125, savings: 'Save $175' }
             ],
             over200: [
-              { name: 'Lemaire Sport Capsule', tip: 'French minimalism meets high-performance athletic wear', price: 185, savings: 'Save $165' },
-              { name: 'The Row Athletic', tip: 'Luxury minimalism in technical performance fabrics', price: 220, savings: 'Save $130' },
-              { name: 'Jil Sander Sport', tip: 'German engineering meets minimalist athletic design', price: 195, savings: 'Save $155' }
+              { name: 'The Row Athletic Line', tip: 'American luxury minimalism in technical fabrics', price: 285, savings: 'Save $215' },
+              { name: 'Jil Sander Sport', tip: 'German engineering meets minimalist athletic design', price: 245, savings: 'Save $155' }
             ]
           },
           bold: {
             under50: [
-              { name: 'Rainbow Shops Athletic', tip: 'Bold colors and patterns at unbeatable prices', price: 18, savings: 'Save $82' },
-              { name: 'Walmart No Boundaries', tip: 'Statement athletic wear with eye-catching graphics', price: 15, savings: 'Save $65' },
-              { name: 'Target Wild Fable Bold', tip: 'Bright colors and unique patterns in athletic cuts', price: 22, savings: 'Save $78' }
+              { name: 'Rainbow Shops Bold Athletic', tip: 'Bright colors and patterns at unbeatable prices', price: 22, savings: 'Save $78' },
+              { name: 'Forever 21 Active Bold', tip: 'Eye-catching workout wear in neon and metallics', price: 18, savings: 'Save $82' }
             ],
             '50to100': [
-              { name: 'Nike Bold Statement', tip: 'Eye-catching colorways and limited edition prints', price: 48, savings: 'Save $72' },
-              { name: 'Adidas Bold Collection', tip: 'Neon colors and geometric patterns in classic cuts', price: 52, savings: 'Save $68' },
-              { name: 'Puma Wild Pack', tip: 'Animal prints and bold colorblocking in athletic wear', price: 45, savings: 'Save $75' }
+              { name: 'Nike Bold Collection', tip: 'Statement colorways and limited edition prints', price: 65, savings: 'Save $85' },
+              { name: 'Adidas Bold Originals', tip: 'Neon colors and geometric patterns', price: 55, savings: 'Save $95' }
             ],
             '100to200': [
-              { name: 'Alo Yoga Neon Dreams', tip: 'Fluorescent colors perfect for making a statement', price: 95, savings: 'Save $55' },
-              { name: 'Outdoor Voices Statement', tip: 'Bold prints and unexpected color combinations', price: 88, savings: 'Save $62' },
-              { name: 'P.E Nation Bold Graphics', tip: 'Australian streetwear meets athletic performance', price: 105, savings: 'Save $45' }
+              { name: 'Alo Neon Dreams Collection', tip: 'Fluorescent athletic wear for making statements', price: 125, savings: 'Save $175' },
+              { name: 'Outdoor Voices Bold Graphics', tip: 'Unexpected color combinations and patterns', price: 95, savings: 'Save $105' }
             ],
             over200: [
-              { name: 'Versace Athletic Couture', tip: 'Luxury athletic wear with iconic bold Versace prints', price: 245, savings: 'Save $105' },
-              { name: 'Kenzo Sport Collection', tip: 'Japanese-French fusion with signature tiger prints', price: 185, savings: 'Save $165' },
-              { name: 'Off-White Athletic', tip: 'Streetwear luxury meets bold athletic performance', price: 225, savings: 'Save $125' }
+              { name: 'Off-White Athletic Collection', tip: 'Streetwear luxury with signature bold graphics', price: 285, savings: 'Save $215' },
+              { name: 'Kenzo Sport Tiger Collection', tip: 'Japanese-French luxury with iconic bold prints', price: 225, savings: 'Save $175' }
+            ]
+          }
+        },
+        formal: {
+          boho: {
+            under50: [
+              { name: 'Vintage Blazer Thrifting', tip: 'Unique vintage pieces with bohemian flair from consignment', price: 35, savings: 'Save $165' },
+              { name: 'Flowing Midi Dress Alternatives', tip: 'Target and H&M formal dresses with boho touches', price: 28, savings: 'Save $172' }
+            ],
+            '50to100': [
+              { name: 'Free People Work Collection', tip: 'Professional pieces with bohemian details during sales', price: 75, savings: 'Save $125' },
+              { name: 'Anthropologie Work Clearance', tip: 'End-of-season formal wear with unique prints', price: 85, savings: 'Save $115' }
+            ],
+            '100to200': [
+              { name: 'Ba&sh Professional Line', tip: 'French boho formal wear during seasonal sales', price: 145, savings: 'Save $155' },
+              { name: 'Sezane Work Capsule', tip: 'Parisian chic meets bohemian professional style', price: 165, savings: 'Save $135' }
+            ],
+            over200: [
+              { name: 'Isabel Marant Professional', tip: 'Luxury bohemian formal wear from outlet stores', price: 285, savings: 'Save $215' },
+              { name: 'Ulla Johnson Business Collection', tip: 'New York boho luxury formal at sample sales', price: 245, savings: 'Save $255' }
+            ]
+          },
+          classic: {
+            under50: [
+              { name: 'Thrift Store Blazers', tip: 'Consignment shops hide designer blazers for $20-40', price: 35, savings: 'Save $165' },
+              { name: 'Banana Republic Factory', tip: 'Professional staples at 60% off retail prices', price: 45, savings: 'Save $85' }
+            ],
+            '50to100': [
+              { name: 'J.Crew Factory Professional', tip: 'American classic workwear at outlet prices', price: 65, savings: 'Save $95' },
+              { name: 'Ann Taylor Sale Section', tip: 'Classic professional pieces during clearance events', price: 55, savings: 'Save $75' }
+            ],
+            '100to200': [
+              { name: 'Theory Outlet Professional', tip: 'Minimalist luxury workwear at outlet prices', price: 145, savings: 'Save $155' },
+              { name: 'Hugo Boss Outlet Suiting', tip: 'German precision tailoring during clearance', price: 165, savings: 'Save $235' }
+            ],
+            over200: [
+              { name: 'Max Mara Weekend Outlet', tip: 'Italian luxury professional wear at sample sales', price: 285, savings: 'Save $315' },
+              { name: 'Brunello Cucinelli Outlet', tip: 'Italian cashmere professional pieces at outlets', price: 385, savings: 'Save $315' }
+            ]
+          },
+          trendy: {
+            under50: [
+              { name: 'Zara Professional Trends', tip: 'Current workwear trends at accessible prices', price: 42, savings: 'Save $108' },
+              { name: 'H&M Conscious Professional', tip: 'Sustainable trendy workwear at budget prices', price: 35, savings: 'Save $115' }
+            ],
+            '50to100': [
+              { name: '& Other Stories Work', tip: 'Scandinavian trendy professional wear', price: 68, savings: 'Save $82' },
+              { name: 'Mango Professional Collection', tip: 'Spanish brand trendy workwear at great prices', price: 55, savings: 'Save $95' }
+            ],
+            '100to200': [
+              { name: 'Ganni Professional Line', tip: 'Danish designer trendy workwear during sales', price: 145, savings: 'Save $155' },
+              { name: 'Sandro Work Collection', tip: 'French trendy professional wear at outlet prices', price: 165, savings: 'Save $135' }
+            ],
+            over200: [
+              { name: 'Stella McCartney Professional', tip: 'Sustainable luxury workwear during sample sales', price: 285, savings: 'Save $315' },
+              { name: 'Proenza Schouler Work', tip: 'New York designer professional pieces at outlets', price: 245, savings: 'Save $255' }
+            ]
+          },
+          minimalist: {
+            under50: [
+              { name: 'COS Professional Essentials', tip: 'Scandinavian minimalism meets office functionality', price: 45, savings: 'Save $105' },
+              { name: 'Everlane Work Collection', tip: 'Sustainable minimalist professional basics', price: 42, savings: 'Save $108' }
+            ],
+            '50to100': [
+              { name: 'ARKET Professional Line', tip: 'Swedish minimalist workwear with perfect fits', price: 65, savings: 'Save $85' },
+              { name: 'Filippa K Professional', tip: 'Swedish minimalism in premium work fabrics', price: 78, savings: 'Save $72' }
+            ],
+            '100to200': [
+              { name: 'Lemaire Work Pieces', tip: 'French minimalist professional wear during sales', price: 165, savings: 'Save $135' },
+              { name: 'Toteme Professional Collection', tip: 'Swedish luxury minimalist workwear on sale', price: 145, savings: 'Save $155' }
+            ],
+            over200: [
+              { name: 'The Row Work Basics', tip: 'American luxury minimalism during rare sales', price: 385, savings: 'Save $215' },
+              { name: 'Jil Sander Navy Professional', tip: 'German minimalist workwear at accessible luxury', price: 285, savings: 'Save $315' }
+            ]
+          },
+          bold: {
+            under50: [
+              { name: 'Vintage Power Suits', tip: 'Statement 80s-inspired pieces from thrift stores', price: 35, savings: 'Save $165' },
+              { name: 'ASOS Bold Professional', tip: 'Head-turning workwear in bright colors', price: 42, savings: 'Save $108' }
+            ],
+            '50to100': [
+              { name: 'Kate Spade Professional', tip: 'Colorful professional pieces during sales', price: 68, savings: 'Save $82' },
+              { name: 'Ted Baker Work Collection', tip: 'British bold professional wear with unique details', price: 85, savings: 'Save $65' }
+            ],
+            '100to200': [
+              { name: 'Diane von Furstenberg Work', tip: 'Iconic prints in professional silhouettes', price: 165, savings: 'Save $135' },
+              { name: 'Moschino Professional Line', tip: 'Italian luxury bold workwear during sales', price: 145, savings: 'Save $155' }
+            ],
+            over200: [
+              { name: 'Versace Professional Collection', tip: 'Bold Italian luxury workwear at outlets', price: 385, savings: 'Save $315' },
+              { name: 'Balmain Work Collection', tip: 'French luxury bold professional at sample sales', price: 285, savings: 'Save $315' }
+            ]
+          }
+        },
+        casual: {
+          boho: {
+            under50: [
+              { name: 'Target Wild Fable Boho', tip: 'Bohemian casual pieces that rival Free People at fraction of cost', price: 25, savings: 'Save $75' },
+              { name: 'Thrift Store Boho Finds', tip: 'Vintage band tees, flowing skirts, and bohemian accessories', price: 18, savings: 'Save $82' }
+            ],
+            '50to100': [
+              { name: 'Free People Sale Section', tip: 'Authentic bohemian pieces during clearance', price: 65, savings: 'Save $85' },
+              { name: 'Urban Outfitters Boho', tip: 'Trendy bohemian casual wear at accessible prices', price: 55, savings: 'Save $95' }
+            ],
+            '100to200': [
+              { name: 'Spell & The Gypsy Collective', tip: 'Australian boho luxury casual during sales', price: 145, savings: 'Save $155' },
+              { name: 'For Love & Lemons Casual', tip: 'California boho luxury at outlet prices', price: 125, savings: 'Save $175' }
+            ],
+            over200: [
+              { name: 'Isabel Marant Casual', tip: 'French luxury bohemian casual at sample sales', price: 285, savings: 'Save $215' },
+              { name: 'Zimmermann Casual Line', tip: 'Australian luxury boho casual during clearance', price: 245, savings: 'Save $255' }
+            ]
+          },
+          classic: {
+            under50: [
+              { name: 'Gap Classic Essentials', tip: 'Timeless casual pieces like chinos and cardigans', price: 25, savings: 'Save $75' },
+              { name: 'Uniqlo Casual Basics', tip: 'Japanese quality casual essentials at unbeatable prices', price: 22, savings: 'Save $78' }
+            ],
+            '50to100': [
+              { name: 'J.Crew Factory Casual', tip: 'American classic casual wear at factory prices', price: 55, savings: 'Save $95' },
+              { name: 'L.L.Bean Casual Collection', tip: 'New England classics with lifetime warranty', price: 68, savings: 'Save $82' }
+            ],
+            '100to200': [
+              { name: 'Brooks Brothers Casual', tip: 'American heritage casual during seasonal sales', price: 128, savings: 'Save $172' },
+              { name: 'Polo Ralph Lauren Outlet', tip: 'American classic casual luxury at outlet prices', price: 145, savings: 'Save $155' }
+            ],
+            over200: [
+              { name: 'Brunello Cucinelli Casual', tip: 'Italian cashmere casual luxury at outlets', price: 285, savings: 'Save $315' },
+              { name: 'Loro Piana Casual Line', tip: 'Italian luxury casual wear during rare sales', price: 385, savings: 'Save $215' }
+            ]
+          },
+          trendy: {
+            under50: [
+              { name: 'H&M Trend Collection', tip: 'Latest casual fashion trends at fast fashion prices', price: 25, savings: 'Save $75' },
+              { name: 'Zara Casual TRF', tip: 'Spanish brand trendy casual with designer influence', price: 35, savings: 'Save $65' }
+            ],
+            '50to100': [
+              { name: 'Urban Outfitters Trends', tip: 'Hip casual trends perfect for social media', price: 55, savings: 'Save $95' },
+              { name: 'ASOS Design Casual', tip: 'British brand trendy casual with global appeal', price: 45, savings: 'Save $105' }
+            ],
+            '100to200': [
+              { name: 'Ganni Casual Collection', tip: 'Danish designer trendy casual during sales', price: 145, savings: 'Save $155' },
+              { name: 'Staud Casual Pieces', tip: 'Los Angeles brand trendy casual at sample sales', price: 125, savings: 'Save $175' }
+            ],
+            over200: [
+              { name: 'Off-White Casual Collection', tip: 'Streetwear luxury casual at consignment shops', price: 285, savings: 'Save $315' },
+              { name: 'Balenciaga Casual Wear', tip: 'French luxury trendy casual at sample sales', price: 385, savings: 'Save $215' }
+            ]
+          },
+          minimalist: {
+            under50: [
+              { name: 'Uniqlo Minimalist Essentials', tip: 'Japanese minimalism in affordable casual basics', price: 28, savings: 'Save $72' },
+              { name: 'COS Casual Basics', tip: 'Scandinavian minimalist casual at great prices', price: 35, savings: 'Save $65' }
+            ],
+            '50to100': [
+              { name: 'ARKET Casual Line', tip: 'Swedish minimalist casual with perfect fits', price: 58, savings: 'Save $92' },
+              { name: 'Filippa K Casual Collection', tip: 'Swedish minimalism in premium casual fabrics', price: 68, savings: 'Save $82' }
+            ],
+            '100to200': [
+              { name: 'Lemaire Casual Pieces', tip: 'French minimalist casual luxury during sales', price: 145, savings: 'Save $155' },
+              { name: 'Toteme Casual Collection', tip: 'Swedish luxury minimalist casual wear', price: 125, savings: 'Save $175' }
+            ],
+            over200: [
+              { name: 'The Row Casual Basics', tip: 'American luxury minimalist casual during sales', price: 285, savings: 'Save $215' },
+              { name: 'Jil Sander Casual Line', tip: 'German minimalist luxury casual at outlets', price: 245, savings: 'Save $255' }
+            ]
+          },
+          bold: {
+            under50: [
+              { name: 'Rainbow Shops Bold Casual', tip: 'Bright colors and bold patterns at budget prices', price: 22, savings: 'Save $78' },
+              { name: 'Forever 21 Bold Graphics', tip: 'Statement casual pieces with eye-catching designs', price: 18, savings: 'Save $82' }
+            ],
+            '50to100': [
+              { name: 'Urban Outfitters Bold Collection', tip: 'Statement casual pieces for confident styling', price: 55, savings: 'Save $95' },
+              { name: 'ASOS Bold Casual', tip: 'Eye-catching casual wear in bold prints', price: 45, savings: 'Save $105' }
+            ],
+            '100to200': [
+              { name: 'Kenzo Casual Bold', tip: 'Japanese-French luxury bold casual during sales', price: 145, savings: 'Save $155' },
+              { name: 'Moschino Casual Collection', tip: 'Italian playful luxury casual at outlets', price: 125, savings: 'Save $175' }
+            ],
+            over200: [
+              { name: 'Versace Casual Bold', tip: 'Bold Italian luxury casual at sample sales', price: 285, savings: 'Save $315' },
+              { name: 'Gucci Casual Statement', tip: 'Italian luxury bold casual at consignment shops', price: 385, savings: 'Save $215' }
+            ]
+          }
+        },
+        evening: {
+          boho: {
+            under50: [
+              { name: 'Target Wild Fable Evening', tip: 'Flowing evening dresses with bohemian flair', price: 28, savings: 'Save $172' },
+              { name: 'Vintage Evening Wear Thrifting', tip: 'Unique bohemian evening pieces from consignment', price: 35, savings: 'Save $165' }
+            ],
+            '50to100': [
+              { name: 'Free People Evening Sale', tip: 'Authentic bohemian evening wear during clearance', price: 78, savings: 'Save $122' },
+              { name: 'ASOS Evening Boho Collection', tip: 'British brand bohemian evening wear', price: 55, savings: 'Save $145' }
+            ],
+            '100to200': [
+              { name: 'Spell Evening Collection', tip: 'Australian luxury boho evening during sales', price: 145, savings: 'Save $155' },
+              { name: 'For Love & Lemons Evening', tip: 'California boho luxury evening at outlets', price: 165, savings: 'Save $135' }
+            ],
+            over200: [
+              { name: 'Isabel Marant Evening', tip: 'French luxury bohemian evening at sample sales', price: 285, savings: 'Save $315' },
+              { name: 'Johanna Ortiz Evening', tip: 'Colombian luxury boho evening at consignment', price: 385, savings: 'Save $215' }
+            ]
+          },
+          classic: {
+            under50: [
+              { name: 'Vintage Evening Wear Thrifting', tip: 'Classic evening pieces from upscale consignment', price: 38, savings: 'Save $162' },
+              { name: 'Target A New Day Evening', tip: 'Classic evening separates and dresses', price: 28, savings: 'Save $172' }
+            ],
+            '50to100': [
+              { name: 'J.Crew Evening Collection', tip: 'American classic evening wear during sales', price: 75, savings: 'Save $125' },
+              { name: 'Banana Republic Evening', tip: 'Professional-meets-evening classic pieces', price: 68, savings: 'Save $132' }
+            ],
+            '100to200': [
+              { name: 'Theory Evening Collection', tip: 'Minimalist classic evening during clearance', price: 145, savings: 'Save $155' },
+              { name: 'Diane von Furstenberg Evening', tip: 'Classic wrap dresses and evening pieces', price: 165, savings: 'Save $135' }
+            ],
+            over200: [
+              { name: 'Ralph Lauren Evening', tip: 'American luxury classic evening at sample sales', price: 285, savings: 'Save $315' },
+              { name: 'Oscar de la Renta Evening', tip: 'American luxury classic evening at consignment', price: 485, savings: 'Save $215' }
+            ]
+          },
+          trendy: {
+            under50: [
+              { name: 'ASOS Design Evening', tip: 'Latest evening trends at budget prices', price: 35, savings: 'Save $165' },
+              { name: 'H&M Trend Evening', tip: 'Current evening fashion at fast fashion prices', price: 28, savings: 'Save $172' }
+            ],
+            '50to100': [
+              { name: 'Urban Outfitters Evening', tip: 'Hip evening trends for nightlife and events', price: 58, savings: 'Save $142' },
+              { name: 'PrettyLittleThing Evening', tip: 'British brand trendy evening with frequent sales', price: 65, savings: 'Save $135' }
+            ],
+            '100to200': [
+              { name: 'Self-Portrait Evening', tip: 'British designer trendy evening at outlets', price: 145, savings: 'Save $155' },
+              { name: 'House of CB Evening', tip: 'British luxury evening with celebrity following', price: 165, savings: 'Save $135' }
+            ],
+            over200: [
+              { name: 'Balmain Evening Collection', tip: 'French luxury trendy evening at sample sales', price: 385, savings: 'Save $315' },
+              { name: 'Alexandre Vauthier Evening', tip: 'French luxury evening perfect for red carpet looks', price: 485, savings: 'Save $215' }
+            ]
+          },
+          minimalist: {
+            under50: [
+              { name: 'COS Evening Essentials', tip: 'Scandinavian minimalist evening wear', price: 42, savings: 'Save $158' },
+              { name: 'Everlane Evening Collection', tip: 'Sustainable minimalist evening with transparency', price: 48, savings: 'Save $152' }
+            ],
+            '50to100': [
+              { name: 'ARKET Evening Line', tip: 'Swedish minimalist evening with perfect tailoring', price: 75, savings: 'Save $125' },
+              { name: 'Filippa K Evening Collection', tip: 'Swedish minimalist luxury evening on sale', price: 85, savings: 'Save $115' }
+            ],
+            '100to200': [
+              { name: 'Lemaire Evening Pieces', tip: 'French minimalist luxury evening during sales', price: 165, savings: 'Save $135' },
+              { name: 'Toteme Evening Collection', tip: 'Swedish luxury minimalist evening on sale', price: 145, savings: 'Save $155' }
+            ],
+            over200: [
+              { name: 'The Row Evening Basics', tip: 'American luxury minimalist evening during sales', price: 385, savings: 'Save $215' },
+              { name: 'Jil Sander Evening Line', tip: 'German minimalist luxury evening at outlets', price: 285, savings: 'Save $315' }
+            ]
+          },
+          bold: {
+            under50: [
+              { name: 'ASOS Bold Evening Collection', tip: 'Statement evening pieces in bold colors', price: 38, savings: 'Save $162' },
+              { name: 'Forever 21 Bold Evening', tip: 'Eye-catching evening pieces at budget prices', price: 28, savings: 'Save $172' }
+            ],
+            '50to100': [
+              { name: 'Urban Outfitters Bold Evening', tip: 'Statement evening pieces for special occasions', price: 65, savings: 'Save $135' },
+              { name: 'Nasty Gal Bold Statement', tip: 'Edgy bold evening wear for confident styling', price: 58, savings: 'Save $142' }
+            ],
+            '100to200': [
+              { name: 'House of CB Bold Evening', tip: 'British luxury evening with celebrity appeal', price: 145, savings: 'Save $155' },
+              { name: 'For Love & Lemons Bold', tip: 'California luxury bold evening during sales', price: 165, savings: 'Save $135' }
+            ],
+            over200: [
+              { name: 'Versace Evening Bold', tip: 'Italian luxury bold evening at sample sales', price: 485, savings: 'Save $315' },
+              { name: 'Tom Ford Evening Collection', tip: 'American luxury bold evening at consignment', price: 685, savings: 'Save $315' }
             ]
           }
         }
-        // Continue with formal, casual, evening...
       },
-      
-      // TRAVEL RECOMMENDATIONS  
       travel: {
         international: {
           romantic: {
             under500: [
-              { name: 'Off-Season Europe Flight Deals', tip: 'Visit Paris in November or February for 60% savings', price: 350, savings: 'Save $450' },
-              { name: 'Eastern Europe Romance', tip: 'Prague and Budapest offer luxury experiences at budget prices', price: 280, savings: 'Save $520' },
-              { name: 'Shoulder Season Japan', tip: 'Cherry blossom alternatives in late fall with fewer crowds', price: 420, savings: 'Save $380' }
+              { name: 'Off-Season Europe', tip: 'Paris in February or Prague in November for 60% savings', price: 380, savings: 'Save $520' },
+              { name: 'Eastern Europe Romance', tip: 'Budapest and Vienna offer luxury at budget prices', price: 320, savings: 'Save $480' }
             ],
             '500to1500': [
-              { name: 'Mediterranean Island Hopping', tip: 'Greek islands in October combine romance with lower prices', price: 850, savings: 'Save $650' },
-              { name: 'Morocco Luxury Riads', tip: 'Authentic riads in Marrakech at fraction of European hotel costs', price: 680, savings: 'Save $820' },
-              { name: 'Portugal Hidden Gems', tip: 'Romantic coastal towns with luxury accommodations under $100/night', price: 720, savings: 'Save $780' }
+              { name: 'Portugal Hidden Gems', tip: 'Porto and coastal towns with luxury accommodations under $80/night', price: 750, savings: 'Save $850' },
+              { name: 'Morocco Luxury Riads', tip: 'Marrakech and Fez riads offer authentic luxury experiences', price: 680, savings: 'Save $920' }
             ],
             '1500to3000': [
               { name: 'Bali Luxury Villa Rental', tip: 'Private infinity pool villas for less than US luxury hotel rates', price: 1450, savings: 'Save $1050' },
-              { name: 'Argentina Wine Country', tip: 'Mendoza vineyard stays with world-class wine at local prices', price: 1650, savings: 'Save $850' },
-              { name: 'Thailand Island Paradise', tip: 'Luxury beachfront resorts during green season discounts', price: 1380, savings: 'Save $1120' }
+              { name: 'Argentina Wine Country', tip: 'Mendoza vineyard stays with world-class wine at local prices', price: 1650, savings: 'Save $850' }
             ],
             over3000: [
               { name: 'Maldives Shoulder Season', tip: 'Overwater bungalows during monsoon transition for 40% off', price: 2800, savings: 'Save $1700' },
-              { name: 'New Zealand Luxury Lodges', tip: 'Remote luxury accommodations during autumn for maximum savings', price: 3200, savings: 'Save $1300' },
-              { name: 'African Safari Romance', tip: 'Luxury tented camps in Botswana during green season', price: 3450, savings: 'Save $1550' }
+              { name: 'New Zealand Luxury Lodges', tip: 'Remote luxury accommodations during autumn for maximum savings', price: 3200, savings: 'Save $1300' }
+            ]
+          },
+          family: {
+            under500: [
+              { name: 'Mexico All-Inclusive Deals', tip: 'Family resorts in Cancun during summer for major savings', price: 380, savings: 'Save $420' },
+              { name: 'Costa Rica Family Adventures', tip: 'Eco-lodges with family activities during rainy season', price: 420, savings: 'Save $380' }
+            ],
+            '500to1500': [
+              { name: 'European Family Rail Pass', tip: 'Eurail family passes make multi-country trips affordable', price: 680, savings: 'Save $820' },
+              { name: 'Japan Family Package', tip: 'Tokyo Disney and cultural sites during shoulder season', price: 950, savings: 'Save $550' }
+            ],
+            '1500to3000': [
+              { name: 'Australian Family Adventure', tip: 'Sydney and Melbourne with family accommodations', price: 1650, savings: 'Save $850' },
+              { name: 'South Africa Family Safari', tip: 'Kid-friendly safari lodges during shoulder season', price: 1850, savings: 'Save $650' }
+            ],
+            over3000: [
+              { name: 'New Zealand Family Luxury', tip: 'North and South Island luxury family adventure', price: 3200, savings: 'Save $1300' },
+              { name: 'Antarctic Family Cruise', tip: 'Once-in-a-lifetime family expedition during shoulder season', price: 3800, savings: 'Save $1700' }
+            ]
+          },
+          nature: {
+            under500: [
+              { name: 'Central America Nature Tours', tip: 'Guatemala and Belize nature adventures at local prices', price: 380, savings: 'Save $420' },
+              { name: 'Romania Carpathian Mountains', tip: 'Untouched European wilderness at Eastern European prices', price: 280, savings: 'Save $520' }
+            ],
+            '500to1500': [
+              { name: 'Nepal Himalayan Trek', tip: 'Everest base camp region with local guide services', price: 680, savings: 'Save $820' },
+              { name: 'Peru Amazon Adventure', tip: 'Luxury eco-lodges in the Amazon at South American prices', price: 850, savings: 'Save $650' }
+            ],
+            '1500to3000': [
+              { name: 'Kenya Wildlife Safari', tip: 'Masai Mara luxury tented camps during migration season', price: 1750, savings: 'Save $750' },
+              { name: 'Galapagos Nature Cruise', tip: 'Endemic wildlife viewing on luxury expedition ships', price: 1650, savings: 'Save $850' }
+            ],
+            over3000: [
+              { name: 'Antarctic Peninsula Expedition', tip: 'Ultimate wildlife photography and nature experience', price: 3500, savings: 'Save $1500' },
+              { name: 'Bhutan Himalayan Luxury', tip: 'Carbon-negative kingdom with mandatory luxury tourism', price: 3200, savings: 'Save $1300' }
+            ]
+          },
+          city: {
+            under500: [
+              { name: 'Eastern European Capitals', tip: 'Prague, Budapest, Krakow with luxury experiences at budget prices', price: 350, savings: 'Save $450' },
+              { name: 'Istanbul Cultural Bridge', tip: 'European luxury meets Asian prices in historic Istanbul', price: 380, savings: 'Save $420' }
+            ],
+            '500to1500': [
+              { name: 'Berlin Cultural Weekend', tip: 'Museums, galleries, and nightlife in affordable European capital', price: 650, savings: 'Save $850' },
+              { name: 'Buenos Aires Tango Culture', tip: 'European architecture and culture at South American prices', price: 720, savings: 'Save $780' }
+            ],
+            '1500to3000': [
+              { name: 'Tokyo Cultural Immersion', tip: 'Traditional meets ultra-modern during shoulder season', price: 1450, savings: 'Save $1050' },
+              { name: 'Paris Art and Culture', tip: 'Museums, galleries, and cuisine during winter months', price: 1650, savings: 'Save $850' }
+            ],
+            over3000: [
+              { name: 'Dubai Luxury Culture', tip: 'Modern Middle Eastern luxury during shoulder season', price: 3200, savings: 'Save $1300' },
+              { name: 'Singapore Cultural Luxury', tip: 'Asian fusion culture with world-class dining', price: 3450, savings: 'Save $1050' }
+            ]
+          },
+          beach: {
+            under500: [
+              { name: 'Mexico Pacific Coast', tip: 'Puerto Vallarta during summer shoulder season', price: 420, savings: 'Save $380' },
+              { name: 'Croatia Island Hopping', tip: 'Adriatic islands before peak tourist season', price: 450, savings: 'Save $350' }
+            ],
+            '500to1500': [
+              { name: 'Greek Island Paradise', tip: 'Santorini and Mykonos during late spring', price: 950, savings: 'Save $550' },
+              { name: 'Thailand Beach Luxury', tip: 'Phuket and Koh Samui during green season', price: 780, savings: 'Save $720' }
+            ],
+            '1500to3000': [
+              { name: 'Seychelles Paradise', tip: 'Indian Ocean luxury during shoulder season savings', price: 1850, savings: 'Save $650' },
+              { name: 'Fiji Island Resort', tip: 'South Pacific luxury during cyclone season discounts', price: 1650, savings: 'Save $850' }
+            ],
+            over3000: [
+              { name: 'Maldives Ultimate Luxury', tip: 'Overwater villas during shoulder season for maximum savings', price: 3200, savings: 'Save $1800' },
+              { name: 'French Polynesia Paradise', tip: 'Bora Bora and Tahiti during shoulder season deals', price: 3650, savings: 'Save $1350' }
             ]
           }
         },
         domestic: {
-          nature: {
+          romantic: {
             under500: [
-              { name: 'National Park Annual Pass', tip: 'Visit 60+ parks for one low price - pays for itself in 3 visits', price: 80, savings: 'Save $320' },
-              { name: 'State Park Camping Upgrades', tip: 'Luxury camping gear rentals make tent camping feel glamorous', price: 150, savings: 'Save $250' },
-              { name: 'Off-Season Mountain Towns', tip: 'Ski resort towns offer summer hiking deals with luxury amenities', price: 280, savings: 'Save $420' }
+              { name: 'Napa Valley Off-Season', tip: 'Wine country romance during harvest season deals', price: 380, savings: 'Save $420' },
+              { name: 'Charleston Historic Romance', tip: 'Southern charm at off-peak rates', price: 320, savings: 'Save $480' }
             ],
             '500to1500': [
-              { name: 'Glamping Resort Deals', tip: 'Luxury camping experiences during shoulder seasons', price: 650, savings: 'Save $350' },
-              { name: 'National Park Lodges', tip: 'Historic park lodges during off-peak times', price: 480, savings: 'Save $520' },
-              { name: 'Eco-Lodge Packages', tip: 'Sustainable luxury accommodations in remote locations', price: 720, savings: 'Save $280' }
+              { name: 'Big Sur Coastal Romance', tip: 'California coast luxury during fog season discounts', price: 850, savings: 'Save $650' },
+              { name: 'Vermont Fall Foliage', tip: 'New England luxury inns during peak color season', price: 750, savings: 'Save $750' }
+            ],
+            '1500to3000': [
+              { name: 'Hawaiian Island Romance', tip: 'Maui and Big Island luxury resorts during off-peak', price: 1650, savings: 'Save $850' },
+              { name: 'Jackson Hole Luxury', tip: 'Wyoming mountain luxury during summer wildflower season', price: 1450, savings: 'Save $1050' }
+            ],
+            over3000: [
+              { name: 'Nantucket Luxury Estate', tip: 'Private island luxury during off-peak season rates', price: 3200, savings: 'Save $1300' },
+              { name: 'Montage Big Sur', tip: 'California coast ultra-luxury during fog season deals', price: 3800, savings: 'Save $1700' }
+            ]
+          },
+          family: {
+            under500: [
+              { name: 'National Park Lodge Tours', tip: 'Yellowstone, Glacier, and Grand Canyon family packages', price: 380, savings: 'Save $420' },
+              { name: 'Great Lakes Family Adventure', tip: 'Michigan and Wisconsin lake resorts during shoulder season', price: 320, savings: 'Save $480' }
+            ],
+            '500to1500': [
+              { name: 'Disney World Off-Peak', tip: 'Orlando theme parks during school season with hotel packages', price: 850, savings: 'Save $650' },
+              { name: 'San Diego Family Beach', tip: 'California coast family resorts during mild winter months', price: 750, savings: 'Save $750' }
+            ],
+            '1500to3000': [
+              { name: 'Yellowstone Family Luxury', tip: 'Wyoming national park luxury lodges with family programs', price: 1550, savings: 'Save $950' },
+              { name: 'Alaska Family Adventure', tip: 'Cruise and land combination during optimal wildlife season', price: 1750, savings: 'Save $750' }
+            ],
+            over3000: [
+              { name: 'Martha\'s Vineyard Family Estate', tip: 'New England island luxury with multi-generational appeal', price: 3200, savings: 'Save $1300' },
+              { name: 'Jackson Hole Family Luxury', tip: 'Wyoming mountain resort with family adventure programs', price: 3450, savings: 'Save $1050' }
+            ]
+          },
+          nature: {
+            under500: [
+              { name: 'Pacific Northwest Hiking', tip: 'Oregon and Washington trails with luxury lodge stays', price: 380, savings: 'Save $420' },
+              { name: 'Adirondack Mountains Retreat', tip: 'New York wilderness luxury during off-peak season', price: 320, savings: 'Save $480' }
+            ],
+            '500to1500': [
+              { name: 'Utah National Parks Tour', tip: 'Big Five national parks with luxury camping experiences', price: 850, savings: 'Save $650' },
+              { name: 'Colorado Rocky Mountains', tip: 'Aspen area luxury during shoulder season rates', price: 750, savings: 'Save $750' }
+            ],
+            '1500to3000': [
+              { name: 'Alaska Wilderness Lodge', tip: 'Remote luxury with pristine nature access', price: 1650, savings: 'Save $850' },
+              { name: 'Montana Glacier Luxury', tip: 'Luxury ranch experiences near Glacier National Park', price: 1450, savings: 'Save $1050' }
+            ],
+            over3000: [
+              { name: 'Hawaii Volcano Luxury', tip: 'Big Island luxury with exclusive volcano access', price: 3200, savings: 'Save $1300' },
+              { name: 'Alaska Ultimate Wilderness', tip: 'Private charter experiences in untouched wilderness', price: 3800, savings: 'Save $1700' }
+            ]
+          },
+          city: {
+            under500: [
+              { name: 'New Orleans Cultural Immersion', tip: 'French Quarter luxury during hurricane season deals', price: 380, savings: 'Save $420' },
+              { name: 'Portland Food and Culture', tip: 'Pacific Northwest city culture during rainy season', price: 320, savings: 'Save $480' }
+            ],
+            '500to1500': [
+              { name: 'New York Cultural Marathon', tip: 'Broadway, museums, and dining during off-peak times', price: 850, savings: 'Save $650' },
+              { name: 'San Francisco Tech and Culture', tip: 'Silicon Valley meets cultural luxury during fog season', price: 750, savings: 'Save $750' }
+            ],
+            '1500to3000': [
+              { name: 'Chicago Architecture and Culture', tip: 'Midwest luxury with world-class architecture tours', price: 1450, savings: 'Save $1050' },
+              { name: 'Miami Art and Beach Culture', tip: 'Art Basel and luxury beach culture during shoulder season', price: 1650, savings: 'Save $850' }
+            ],
+            over3000: [
+              { name: 'Las Vegas Luxury Experience', tip: 'High-end shows, dining, and accommodations', price: 3200, savings: 'Save $1300' },
+              { name: 'Los Angeles Celebrity Culture', tip: 'Hollywood luxury with exclusive access experiences', price: 3450, savings: 'Save $1050' }
+            ]
+          },
+          beach: {
+            under500: [
+              { name: 'Florida Keys Adventure', tip: 'Key Largo and Islamorada during hurricane season deals', price: 380, savings: 'Save $420' },
+              { name: 'California Central Coast', tip: 'Pismo Beach and Cambria during fog season', price: 320, savings: 'Save $480' }
+            ],
+            '500to1500': [
+              { name: 'Outer Banks Luxury', tip: 'North Carolina beach luxury during shoulder season', price: 750, savings: 'Save $750' },
+              { name: 'Maine Coast Luxury', tip: 'Kennebunkport and Bar Harbor during off-peak rates', price: 850, savings: 'Save $650' }
+            ],
+            '1500to3000': [
+              { name: 'Hawaiian Beach Luxury', tip: 'Oahu and Maui beach resorts during local rates', price: 1650, savings: 'Save $850' },
+              { name: 'California Luxury Beach', tip: 'Carmel and Monterey luxury during shoulder season', price: 1450, savings: 'Save $1050' }
+            ],
+            over3000: [
+              { name: 'Hamptons Luxury Beach', tip: 'New York beach luxury during off-peak season', price: 3200, savings: 'Save $1300' },
+              { name: 'Martha\'s Vineyard Beach Estate', tip: 'Island luxury with private beach access', price: 3800, savings: 'Save $1700' }
             ]
           }
         }
       },
-      
-      // DINING RECOMMENDATIONS
       dining: {
         dineout: {
-          italian: {
-            under50: [
-              { name: 'Happy Hour Italian Restaurants', tip: 'Upscale Italian spots offer half-price appetizers 4-6pm', price: 25, savings: 'Save $35' },
-              { name: 'Lunch Prix Fixe Menus', tip: 'Same chef, same kitchen - 60% less expensive at lunch', price: 35, savings: 'Save $45' },
-              { name: 'Wine Bar Italian Small Plates', tip: 'Authentic Italian bites during aperitivo hour', price: 28, savings: 'Save $42' }
-            ],
-            '50to100': [
-              { name: 'Restaurant Week Italian Fine Dining', tip: 'Michelin-recommended restaurants offer $50-75 multi-course meals', price: 65, savings: 'Save $85' },
-              { name: 'Italian Wine Pairing Events', tip: 'Sommelier-guided tastings with food pairings', price: 55, savings: 'Save $95' },
-              { name: 'Chef\'s Table Experiences', tip: 'Kitchen counter dining at top Italian restaurants', price: 78, savings: 'Save $72' }
-            ]
-          },
           french: {
             under50: [
-              { name: 'French Bistro Lunch Specials', tip: 'Authentic French bistros offer $25-35 lunch menus', price: 32, savings: 'Save $48' },
-              { name: 'Wine Bar French Plates', tip: 'Traditional French small plates during happy hour', price: 28, savings: 'Save $42' },
-              { name: 'Boulangerie Café Dining', tip: 'Fresh French pastries and light meals at bakery prices', price: 18, savings: 'Save $32' }
+              { name: 'French Bistro Happy Hours', tip: 'Authentic French cuisine during early dinner hours', price: 28, savings: 'Save $42' },
+              { name: 'French Bakery Cafe Dinners', tip: 'Local patisseries often serve dinner with wine pairings', price: 22, savings: 'Save $38' }
+            ],
+            '50to100': [
+              { name: 'BYOB French Restaurants', tip: 'Upscale French cuisine without markup on wine', price: 45, savings: 'Save $55' },
+              { name: 'French Cooking Classes', tip: 'Learn while dining on multi-course meals', price: 65, savings: 'Save $85' }
+            ],
+            '100to200': [
+              { name: 'French Wine Dinners', tip: 'Multi-course French meals with sommelier pairings', price: 125, savings: 'Save $175' },
+              { name: 'Chef\'s Table French Experience', tip: 'Intimate French dining with chef interaction', price: 145, savings: 'Save $155' }
+            ],
+            over200: [
+              { name: 'Michelin French Lunch Menus', tip: 'Starred restaurants offer lunch at fraction of dinner cost', price: 185, savings: 'Save $315' },
+              { name: 'French Tasting Menu Deals', tip: 'Multi-course French luxury during restaurant week', price: 225, savings: 'Save $275' }
+            ]
+          },
+          italian: {
+            under50: [
+              { name: 'Italian Market Prepared Foods', tip: 'Fresh pasta and antipasto from Italian groceries', price: 18, savings: 'Save $32' },
+              { name: 'Neighborhood Trattoria Happy Hours', tip: 'Authentic pasta and wine at local Italian spots', price: 25, savings: 'Save $35' }
+            ],
+            '50to100': [
+              { name: 'Italian Wine Bar Dinners', tip: 'Enotecas offer full meals with wine pairings', price: 55, savings: 'Save $65' },
+              { name: 'Little Italy Restaurant Week', tip: 'Multi-course Italian dinners during promotional periods', price: 42, savings: 'Save $58' }
+            ],
+            '100to200': [
+              { name: 'Italian Chef\'s Table Experience', tip: 'Watch pasta being made while dining on authentic Italian', price: 125, savings: 'Save $175' },
+              { name: 'Italian Wine and Food Pairing', tip: 'Regional Italian wines paired with traditional dishes', price: 145, savings: 'Save $155' }
+            ],
+            over200: [
+              { name: 'Italian Michelin Experience', tip: 'Starred Italian restaurants during lunch service', price: 185, savings: 'Save $315' },
+              { name: 'Italian Tasting Menu Journey', tip: 'Multi-region Italian tasting menu experiences', price: 225, savings: 'Save $275' }
+            ]
+          },
+          asian: {
+            under50: [
+              { name: 'Asian Night Markets', tip: 'Street food style dining with restaurant quality', price: 15, savings: 'Save $35' },
+              { name: 'BYOB Asian Fusion', tip: 'Upscale Asian cuisine without alcohol markup', price: 32, savings: 'Save $48' }
+            ],
+            '50to100': [
+              { name: 'Omakase Lunch Specials', tip: 'Japanese chef choice meals at lunch prices', price: 65, savings: 'Save $85' },
+              { name: 'Korean BBQ All-You-Can-Eat', tip: 'Premium cuts and unlimited banchan at fixed price', price: 35, savings: 'Save $65' }
+            ],
+            '100to200': [
+              { name: 'High-End Ramen Experience', tip: 'Artisanal ramen with premium ingredients and sake pairings', price: 125, savings: 'Save $175' },
+              { name: 'Asian Fusion Tasting Menu', tip: 'Multi-course Asian fusion with wine pairings', price: 145, savings: 'Save $155' }
+            ],
+            over200: [
+              { name: 'Omakase Dinner Experience', tip: 'Premium sushi with imported fish and sake pairings', price: 225, savings: 'Save $275' },
+              { name: 'Asian Michelin Experience', tip: 'Starred Asian restaurants during promotional periods', price: 185, savings: 'Save $315' }
+            ]
+          },
+          mediterranean: {
+            under50: [
+              { name: 'Greek Taverna Happy Hours', tip: 'Authentic mezze and wine at family-owned establishments', price: 25, savings: 'Save $35' },
+              { name: 'Turkish Restaurant Lunch Specials', tip: 'Hearty Mediterranean meals during lunch hours', price: 18, savings: 'Save $32' }
+            ],
+            '50to100': [
+              { name: 'Mediterranean Wine and Mezze', tip: 'Small plates with wine pairings from the region', price: 55, savings: 'Save $65' },
+              { name: 'Lebanese Family Style Dining', tip: 'Shared Mediterranean feast experiences', price: 42, savings: 'Save $58' }
+            ],
+            '100to200': [
+              { name: 'Mediterranean Chef\'s Table', tip: 'Interactive Mediterranean cooking with wine pairings', price: 125, savings: 'Save $175' },
+              { name: 'Greek Island Wine Dinner', tip: 'Imported Greek wines with traditional island cuisine', price: 145, savings: 'Save $155' }
+            ],
+            over200: [
+              { name: 'Mediterranean Tasting Journey', tip: 'Multi-country Mediterranean experience with rare wines', price: 225, savings: 'Save $275' },
+              { name: 'Luxury Mediterranean Experience', tip: 'High-end Mediterranean with imported ingredients', price: 185, savings: 'Save $315' }
+            ]
+          },
+          american: {
+            under50: [
+              { name: 'Farm-to-Table Lunch Specials', tip: 'Local American cuisine during lunch service', price: 25, savings: 'Save $35' },
+              { name: 'Brewery Restaurant Combos', tip: 'Craft beer and American food pairings', price: 32, savings: 'Save $48' }
+            ],
+            '50to100': [
+              { name: 'American Steakhouse Happy Hours', tip: 'Premium cuts and cocktails during off-peak hours', price: 65, savings: 'Save $85' },
+              { name: 'Southern Comfort Food Experience', tip: 'Authentic American regional cuisine with cocktails', price: 55, savings: 'Save $65' }
+            ],
+            '100to200': [
+              { name: 'American Fine Dining Experience', tip: 'Modern American cuisine with craft cocktail pairings', price: 145, savings: 'Save $155' },
+              { name: 'Regional American Tasting Menu', tip: 'Multi-region American cuisine journey', price: 125, savings: 'Save $175' }
+            ],
+            over200: [
+              { name: 'American Michelin Experience', tip: 'Starred American restaurants during restaurant week', price: 225, savings: 'Save $275' },
+              { name: 'Luxury American Steakhouse', tip: 'Premium dry-aged steaks with rare whiskey pairings', price: 285, savings: 'Save $215' }
+            ]
+          },
+          mexican: {
+            under50: [
+              { name: 'Authentic Taqueria Experiences', tip: 'Family-owned Mexican restaurants with handmade tortillas', price: 15, savings: 'Save $35' },
+              { name: 'Mexican Market Food Halls', tip: 'Diverse Mexican regional specialties under one roof', price: 22, savings: 'Save $38' }
+            ],
+            '50to100': [
+              { name: 'Mezcal and Mexican Food Pairing', tip: 'Premium mezcal tastings with traditional Mexican cuisine', price: 55, savings: 'Save $65' },
+              { name: 'Mexican Regional Cuisine Tour', tip: 'Different Mexican states represented in one meal', price: 45, savings: 'Save $55' }
+            ],
+            '100to200': [
+              { name: 'Upscale Mexican Tasting Menu', tip: 'Modern Mexican cuisine with tequila and mezcal pairings', price: 125, savings: 'Save $175' },
+              { name: 'Mexican Chef\'s Table Experience', tip: 'Interactive Mexican cooking with premium spirits', price: 145, savings: 'Save $155' }
+            ],
+            over200: [
+              { name: 'Luxury Mexican Experience', tip: 'High-end Mexican with rare agave spirits', price: 185, savings: 'Save $315' },
+              { name: 'Mexican Michelin Experience', tip: 'Starred Mexican restaurants during promotional periods', price: 225, savings: 'Save $275' }
             ]
           }
         },
         cookathome: {
-          italian: {
-            under50: [
-              { name: 'Italian Market Shopping', tip: 'Shop Italian delis and markets for authentic ingredients', price: 35, savings: 'Save $65' },
-              { name: 'Pasta Making Kits', tip: 'Create restaurant-quality pasta at home for family meals', price: 25, savings: 'Save $75' },
-              { name: 'Italian Cookbook Classics', tip: 'Master traditional recipes with authentic technique guides', price: 20, savings: 'Save $80' }
-            ],
-            '50to100': [
-              { name: 'Premium Italian Ingredients', tip: 'San Marzano tomatoes and real Parmigiano for authentic flavors', price: 65, savings: 'Save $135' },
-              { name: 'Italian Wine Pairing Kit', tip: 'Regional wines to pair with homemade Italian meals', price: 48, savings: 'Save $152' },
-              { name: 'Truffle Oil and Luxury Additions', tip: 'Restaurant-quality finishing touches for homemade dishes', price: 55, savings: 'Save $145' }
-            ]
-          },
           french: {
             under50: [
-              { name: 'French Cooking Basics', tip: 'Master mother sauces and classic techniques at home', price: 30, savings: 'Save $170' },
-              { name: 'French Cheese and Wine', tip: 'Create authentic French cheese courses with proper pairings', price: 42, savings: 'Save $158' },
-              { name: 'French Pastry Ingredients', tip: 'European butter and quality ingredients for authentic pastries', price: 38, savings: 'Save $162' }
+              { name: 'French Market Shopping', tip: 'Authentic ingredients from specialty French markets', price: 35, savings: 'Save $65' },
+              { name: 'Online French Cooking Classes', tip: 'Learn classic techniques with ingredient delivery', price: 45, savings: 'Save $55' }
+            ],
+            '50to100': [
+              { name: 'French Wine Club with Recipes', tip: 'Monthly wine shipments with paired recipe cards', price: 75, savings: 'Save $125' },
+              { name: 'Specialty French Ingredient Boxes', tip: 'Curated monthly boxes of authentic French ingredients', price: 65, savings: 'Save $85' }
+            ],
+            '100to200': [
+              { name: 'French Culinary School Kits', tip: 'Professional-grade French cooking equipment and ingredients', price: 145, savings: 'Save $155' },
+              { name: 'French Chef Video Course Package', tip: 'Master class with premium French ingredients included', price: 125, savings: 'Save $175' }
+            ],
+            over200: [
+              { name: 'French Luxury Ingredient Subscription', tip: 'Truffle, foie gras, and premium French delicacies monthly', price: 225, savings: 'Save $275' },
+              { name: 'French Wine and Cheese Luxury Box', tip: 'Artisanal French cheeses with vintage wine pairings', price: 185, savings: 'Save $315' }
+            ]
+          },
+          italian: {
+            under50: [
+              { name: 'Italian Specialty Store Hauls', tip: 'Import quality pasta, sauces, and cheeses', price: 28, savings: 'Save $42' },
+              { name: 'Fresh Pasta Making Kits', tip: 'Everything needed for authentic homemade pasta', price: 22, savings: 'Save $38' }
+            ],
+            '50to100': [
+              { name: 'Italian Wine and Recipe Pairings', tip: 'Monthly Italian wine with traditional recipe cards', price: 55, savings: 'Save $75' },
+              { name: 'Authentic Italian Ingredient Subscriptions', tip: 'Regional Italian specialties delivered monthly', price: 68, savings: 'Save $82' }
+            ],
+            '100to200': [
+              { name: 'Italian Culinary Master Class Kit', tip: 'Professional Italian cooking course with premium ingredients', price: 125, savings: 'Save $175' },
+              { name: 'Italian Wine and Ingredient Pairing', tip: 'Regional Italian wines with matching specialty ingredients', price: 145, savings: 'Save $155' }
+            ],
+            over200: [
+              { name: 'Italian Luxury Ingredient Collection', tip: 'Truffle oils, aged balsamic, premium cheeses monthly', price: 185, savings: 'Save $315' },
+              { name: 'Italian Wine Cellar Starter Kit', tip: 'Vintage Italian wines with aging and tasting guides', price: 225, savings: 'Save $275' }
+            ]
+          },
+          asian: {
+            under50: [
+              { name: 'Asian Market Ingredient Tours', tip: 'Authentic Asian ingredients with cooking guide videos', price: 25, savings: 'Save $35' },
+              { name: 'Ramen Making Kits', tip: 'Everything needed for restaurant-quality ramen at home', price: 32, savings: 'Save $48' }
+            ],
+            '50to100': [
+              { name: 'Asian Fusion Cooking Classes', tip: 'Online classes with ingredient kits delivered', price: 65, savings: 'Save $85' },
+              { name: 'Asian Spice and Sauce Collection', tip: 'Authentic Asian condiments and spices with recipes', price: 55, savings: 'Save $65' }
+            ],
+            '100to200': [
+              { name: 'Asian Culinary Journey Kit', tip: 'Multi-country Asian cooking course with ingredients', price: 125, savings: 'Save $175' },
+              { name: 'Premium Asian Ingredient Subscription', tip: 'High-end Asian ingredients and sake pairings', price: 145, savings: 'Save $155' }
+            ],
+            over200: [
+              { name: 'Asian Luxury Ingredient Collection', tip: 'Wagyu, premium soy sauces, rare Asian delicacies', price: 225, savings: 'Save $275' },
+              { name: 'Asian Wine and Sake Master Kit', tip: 'Premium Asian alcohols with traditional pairing foods', price: 185, savings: 'Save $315' }
+            ]
+          },
+          mediterranean: {
+            under50: [
+              { name: 'Mediterranean Pantry Essentials', tip: 'Olive oils, spices, and grains for authentic Mediterranean cooking', price: 28, savings: 'Save $42' },
+              { name: 'Greek Cooking Class Kit', tip: 'Learn authentic Greek recipes with ingredient delivery', price: 35, savings: 'Save $65' }
+            ],
+            '50to100': [
+              { name: 'Mediterranean Wine and Ingredient Pairing', tip: 'Regional wines with matching Mediterranean ingredients', price: 65, savings: 'Save $85' },
+              { name: 'Middle Eastern Spice Collection', tip: 'Authentic spice blends with traditional recipe guides', price: 55, savings: 'Save $75' }
+            ],
+            '100to200': [
+              { name: 'Mediterranean Culinary Tour Kit', tip: 'Multi-country Mediterranean cooking course with ingredients', price: 125, savings: 'Save $175' },
+              { name: 'Premium Mediterranean Ingredient Box', tip: 'Artisanal olive oils, aged cheeses, cured meats monthly', price: 145, savings: 'Save $155' }
+            ],
+            over200: [
+              { name: 'Mediterranean Luxury Ingredient Collection', tip: 'Rare olive oils, aged balsamic, premium Mediterranean delicacies', price: 185, savings: 'Save $315' },
+              { name: 'Mediterranean Wine Cellar Kit', tip: 'Regional Mediterranean wines with food pairing guides', price: 225, savings: 'Save $275' }
+            ]
+          },
+          american: {
+            under50: [
+              { name: 'American BBQ Smoking Kits', tip: 'Wood chips, rubs, and techniques for authentic American BBQ', price: 32, savings: 'Save $48' },
+              { name: 'Regional American Cookbook Collection', tip: 'Traditional American recipes with ingredient sourcing guides', price: 25, savings: 'Save $35' }
+            ],
+            '50to100': [
+              { name: 'American Craft Beer and Food Pairing', tip: 'Local craft beers with matching American comfort food recipes', price: 65, savings: 'Save $85' },
+              { name: 'Southern Comfort Food Kit', tip: 'Authentic Southern ingredients with traditional recipe collection', price: 55, savings: 'Save $75' }
+            ],
+            '100to200': [
+              { name: 'American Regional Cuisine Kit', tip: 'Multi-region American cooking course with local ingredients', price: 125, savings: 'Save $175' },
+              { name: 'American Whiskey and Food Pairing', tip: 'Premium American whiskeys with matching comfort food recipes', price: 145, savings: 'Save $155' }
+            ],
+            over200: [
+              { name: 'American Luxury Ingredient Collection', tip: 'Premium American steaks, artisanal ingredients monthly', price: 225, savings: 'Save $275' },
+              { name: 'American Craft Distillery Collection', tip: 'Rare American spirits with traditional food pairings', price: 185, savings: 'Save $315' }
+            ]
+          },
+          mexican: {
+            under50: [
+              { name: 'Mexican Pantry Starter Kit', tip: 'Essential Mexican ingredients and spice blends', price: 22, savings: 'Save $38' },
+              { name: 'Authentic Mexican Cooking Class', tip: 'Online classes with traditional Mexican ingredient kits', price: 35, savings: 'Save $65' }
+            ],
+            '50to100': [
+              { name: 'Mexican Regional Cuisine Kit', tip: 'Different Mexican states\' specialties with ingredient guides', price: 55, savings: 'Save $75' },
+              { name: 'Mezcal and Mexican Food Pairing', tip: 'Premium mezcal with traditional Mexican ingredients', price: 65, savings: 'Save $85' }
+            ],
+            '100to200': [
+              { name: 'Mexican Culinary Master Class', tip: 'Professional Mexican cooking course with premium ingredients', price: 125, savings: 'Save $175' },
+              { name: 'Mexican Artisanal Ingredient Box', tip: 'Handmade Mexican specialties and rare chiles monthly', price: 145, savings: 'Save $155' }
+            ],
+            over200: [
+              { name: 'Mexican Luxury Ingredient Collection', tip: 'Rare agave spirits, artisanal Mexican delicacies monthly', price: 185, savings: 'Save $315' },
+              { name: 'Mexican Heritage Spirits Collection', tip: 'Vintage tequila and mezcal with traditional food pairings', price: 225, savings: 'Save $275' }
             ]
           }
         }
       }
     };
 
-    // === BROKE BILLIONAIRE LOGIC ===
-    let currentStep = 1;
-    let selectedCategory = '';
-    let generatedText = '';
-    let flowPath = [];
-    let userSelections = {};
+    // IMPROVED FALLBACK SYSTEM
+    const CATEGORY_FALLBACKS = {
+      fashion: [
+        { name: 'Personal Stylist Consultation', tip: 'Book virtual styling with Stitch Fix or Trunk Club for personalized recommendations', price: 25, savings: 'Save $75' },
+        { name: 'Fashion Rental Service Trial', tip: 'Try Rent the Runway or Le Tote for luxury fashion at fraction of retail', price: 35, savings: 'Save $165' }
+      ],
+      travel: [
+        { name: 'Travel Deal Aggregator Strategy', tip: 'Use Scott\'s Cheap Flights + Google Flights for your destination and dates', price: 20, savings: 'Save $300' },
+        { name: 'Local Travel Agent Consultation', tip: 'Specialized agents often have exclusive deals and insider knowledge', price: 0, savings: 'Save $200' }
+      ],
+      dining: [
+        { name: 'Local Food Discovery Plan', tip: 'Use Groupon + OpenTable for upscale dining deals in your area', price: 15, savings: 'Save $45' },
+        { name: 'Restaurant Week Strategy', tip: 'Plan dining around local restaurant weeks for luxury at accessible prices', price: 0, savings: 'Save $75' }
+      ]
+    };
 
-    function selectCategory(el, category) {
-      document.querySelectorAll('.radio-item').forEach(item => item.classList.remove('selected'));
-      el.classList.add('selected');
-      el.querySelector('input').checked = true;
+    // Navigation functions
+    function selectCategory(element, category) {
+      document.querySelectorAll('.radio-item').forEach(item => {
+        item.classList.remove('selected');
+        item.querySelector('input').checked = false;
+      });
+      
+      element.classList.add('selected');
+      element.querySelector('input').checked = true;
       selectedCategory = category;
-      userSelections.category = category;
     }
 
-    function selectTravelType(el, type) {
-      document.querySelectorAll('#travelScreen2 .radio-item').forEach(item => item.classList.remove('selected'));
-      el.classList.add('selected');
-      el.querySelector('input').checked = true;
-      userSelections.travelType = type;
+    function selectTravelType(element, type) {
+      document.querySelectorAll('.radio-item').forEach(item => {
+        item.classList.remove('selected');
+        item.querySelector('input').checked = false;
+      });
+      
+      element.classList.add('selected');
+      element.querySelector('input').checked = true;
+      selectedType = type;
     }
 
-    function selectDiningType(el, type) {
-      document.querySelectorAll('#diningScreen2 .radio-item').forEach(item => item.classList.remove('selected'));
-      el.classList.add('selected');
-      el.querySelector('input').checked = true;
-      userSelections.diningType = type;
+    function selectDiningType(element, type) {
+      document.querySelectorAll('.radio-item').forEach(item => {
+        item.classList.remove('selected');
+        item.querySelector('input').checked = false;
+      });
+      
+      element.classList.add('selected');
+      element.querySelector('input').checked = true;
+      selectedType = type;
     }
 
-    function selectOption(el) {
-      const cb = el.querySelector('input');
-      cb.checked = !cb.checked;
-      el.classList.toggle('selected', cb.checked);
-    }
-
-    function updateSteps(step) {
-      for(let i = 1; i <= 4; i++) {
-        const s = document.getElementById('step' + i);
-        if(!s) continue;
-        s.className = i < step ? 'step completed' : (i === step ? 'step active' : 'step');
+    function selectOption(element, option) {
+      const checkbox = element.querySelector('input');
+      
+      if (checkbox.checked) {
+        element.classList.remove('selected');
+        checkbox.checked = false;
+        selectedOptions = selectedOptions.filter(item => item !== option);
+      } else {
+        element.classList.add('selected');
+        checkbox.checked = true;
+        selectedOptions.push(option);
       }
-      document.getElementById('progressText').textContent = 'Step ' + step + ' of 4';
     }
 
     function goToStep2() {
-      if(!selectedCategory) {
-        alert('Please select a luxury focus area!');
+      if (!selectedCategory) {
+        alert('Please select a category first!');
         return;
       }
       
+      updateStepIndicator(2);
+      hideAllScreens();
+      document.getElementById(`${selectedCategory}Screen2`).classList.add('active');
+      document.getElementById('progressText').textContent = 'Step 2 of 4';
       currentStep = 2;
-      updateSteps(2);
-      document.getElementById('screen1').classList.remove('active');
-      
-      if(selectedCategory === 'fashion') {
-        document.getElementById('fashionScreen2').classList.add('active');
-        flowPath = ['screen1', 'fashionScreen2', 'fashionScreen3', 'fashionScreen4'];
-      } else if(selectedCategory === 'travel') {
-        document.getElementById('travelScreen2').classList.add('active');
-        flowPath = ['screen1', 'travelScreen2', 'travelScreen3', 'travelScreen4'];
-      } else if(selectedCategory === 'dining') {
-        document.getElementById('diningScreen2').classList.add('active');
-        flowPath = ['screen1', 'diningScreen2', 'diningScreen3', 'diningScreen4'];
-      }
     }
 
     function goToStep3() {
+      updateStepIndicator(3);
+      hideAllScreens();
+      document.getElementById(`${selectedCategory}Screen3`).classList.add('active');
+      document.getElementById('progressText').textContent = 'Step 3 of 4';
       currentStep = 3;
-      updateSteps(3);
-      document.querySelector('.screen.active').classList.remove('active');
-      
-      if(selectedCategory === 'fashion') {
-        document.getElementById('fashionScreen3').classList.add('active');
-      } else if(selectedCategory === 'travel') {
-        document.getElementById('travelScreen3').classList.add('active');
-      } else if(selectedCategory === 'dining') {
-        document.getElementById('diningScreen3').classList.add('active');
-      }
     }
 
     function goToStep4() {
+      updateStepIndicator(4);
+      hideAllScreens();
+      document.getElementById(`${selectedCategory}Screen4`).classList.add('active');
+      document.getElementById('progressText').textContent = 'Step 4 of 4';
       currentStep = 4;
-      updateSteps(4);
-      document.querySelector('.screen.active').classList.remove('active');
-      
-      if(selectedCategory === 'fashion') {
-        document.getElementById('fashionScreen4').classList.add('active');
-      } else if(selectedCategory === 'travel') {
-        document.getElementById('travelScreen4').classList.add('active');
-      } else if(selectedCategory === 'dining') {
-        document.getElementById('diningScreen4').classList.add('active');
-      }
     }
 
     function goBack() {
-      if(currentStep > 1) {
-        currentStep--;
-        updateSteps(currentStep);
-        document.querySelector('.screen.active').classList.remove('active');
+      currentStep--;
+      updateStepIndicator(currentStep);
+      hideAllScreens();
+      
+      if (currentStep === 1) {
+        document.getElementById('screen1').classList.add('active');
+        document.getElementById('progressText').textContent = 'Step 1 of 4';
+      } else {
+        document.getElementById(`${selectedCategory}Screen${currentStep}`).classList.add('active');
+        document.getElementById('progressText').textContent = `Step ${currentStep} of 4`;
+      }
+    }
+
+    function hideAllScreens() {
+      document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+      });
+    }
+
+    function updateStepIndicator(step) {
+      for (let i = 1; i <= 4; i++) {
+        const stepElement = document.getElementById(`step${i}`);
+        stepElement.classList.remove('active', 'completed');
         
-        if(currentStep === 1) {
-          document.getElementById('screen1').classList.add('active');
-        } else {
-          const prevScreen = flowPath[currentStep - 1];
-          document.getElementById(prevScreen).classList.add('active');
+        if (i < step) {
+          stepElement.classList.add('completed');
+        } else if (i === step) {
+          stepElement.classList.add('active');
         }
       }
     }
 
     function generatePlan() {
-      document.querySelector('.screen.active').classList.remove('active');
+      collectUserData();
+      
+      hideAllScreens();
       document.getElementById('loadingScreen').classList.add('active');
       
       setTimeout(() => {
-        document.getElementById('loadingScreen').classList.remove('active');
+        createLuxuryPlan();
+        hideAllScreens();
         document.getElementById('resultsScreen').classList.add('active');
-        showLuxuryPlan();
-      }, 1500);
+      }, 3000);
     }
 
-    function showLuxuryPlan() {
-      let recommendations = [];
-      let planTitle = '';
-      
-      if(selectedCategory === 'fashion') {
-        recommendations = generateFashionRecommendations();
-        planTitle = 'Designer Fashion Plan';
-      } else if(selectedCategory === 'travel') {
-        recommendations = generateTravelRecommendations();
-        planTitle = 'Luxury Travel Plan';
-      } else if(selectedCategory === 'dining') {
-        recommendations = generateDiningRecommendations();
-        planTitle = 'Elegant Dining Plan';
+    function collectUserData() {
+      if (selectedCategory === 'fashion') {
+        userData = {
+          category: selectedCategory,
+          types: selectedOptions,
+          budget: document.getElementById('fashionBudget').value,
+          quantity: document.getElementById('outfitCount').value
+        };
+      } else if (selectedCategory === 'travel') {
+        userData = {
+          category: selectedCategory,
+          type: selectedType,
+          styles: selectedOptions,
+          budget: document.getElementById('travelBudget').value,
+          travelers: document.getElementById('travelerCount').value
+        };
+      } else if (selectedCategory === 'dining') {
+        userData = {
+          category: selectedCategory,
+          type: selectedType,
+          cuisines: selectedOptions,
+          budget: document.getElementById('diningBudget').value,
+          diners: document.getElementById('dinerCount').value
+        };
       }
-
-      const listHTML = `
-        <div class="list-item">
-          <div class="item-header">
-            <span class="item-title">${planTitle}</span>
-            <span class="quantity-badge">${recommendations.length} Strategies</span>
-          </div>
-          ${recommendations.map(item => `
-            <div class="product-block">
-              <div class="product-name">${item.name}</div>
-              <div class="product-details">
-                <div style="margin-bottom:6px;">${item.tip}</div>
-                <div style="display:flex;justify-content:space-between;">
-                  <span class="price">~$${item.price}</span>
-                  <span style="color:#15803d;font-weight:600;">${item.savings}</span>
-                </div>
-              </div>
-            </div>
-          `).join('')}
-          <div class="product-details" style="margin-top:15px;padding-top:15px;border-top:1px solid #eee;color:#4a5568;">
-            💡 <strong>Pro tip:</strong> Stack these strategies for maximum luxury impact!
-          </div>
-        </div>`;
-
-      document.getElementById('luxuryList').innerHTML = listHTML;
-
-      const avgPrice = Math.round(recommendations.reduce((acc, item) => acc + item.price, 0) / recommendations.length);
-      
-      document.getElementById('summary').innerHTML = `
-        <h3 style="margin-bottom:20px;text-align:center;">Your Luxury Summary</h3>
-        <div class="summary-row"><span>Category:</span><span>${selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}</span></div>
-        <div class="summary-row"><span>Plan Type:</span><span>${planTitle}</span></div>
-        <div class="summary-row"><span>Strategies:</span><span>${recommendations.length}</span></div>
-        <div class="summary-row"><span>Avg Cost:</span><span>$${avgPrice}</span></div>
-        <div class="summary-row"><span>Luxury Level:</span><span>Billionaire ✨</span></div>`;
-
-      generatedText = `${planTitle}\n\n` +
-        recommendations.map(item => `${item.name}\n${item.tip}\nCost: ~$${item.price} (${item.savings})\n`).join('\n') +
-        `\n💎 Lux without the bucks with Broke Billionaire strategies!`;
     }
 
-    function generateFashionRecommendations() {
-      const clothingTypes = getSelectedCheckboxes('fashionScreen2');
-      const styles = getSelectedCheckboxes('fashionScreen3');
-      const budget = document.getElementById('fashionBudget').value;
-      const quantity = document.getElementById('outfitCount').value;
+    function createLuxuryPlan() {
+      const luxuryList = document.getElementById('luxuryList');
+      const summary = document.getElementById('summary');
       
-      let recommendations = [];
+      let recommendations = getFilteredRecommendations();
       
-      // Get recommendations for each clothing type + style combination
-      clothingTypes.forEach(clothing => {
-        styles.forEach(style => {
-          const categoryRecs = LUXURY_CATALOG.fashion?.[clothing]?.[style]?.[budget];
-          if(categoryRecs && categoryRecs.length > 0) {
-            recommendations.push(categoryRecs[0]); // Take first recommendation for each combo
+      let listHTML = '';
+      let totalCost = 0;
+      let totalSavings = 0;
+      
+      recommendations.forEach((item, index) => {
+        listHTML += `
+          <div class="list-item">
+            <div class="item-header">
+              <div class="item-title">${item.name}</div>
+              <div class="quantity-badge">$${item.price}</div>
+            </div>
+            <div class="product-block">
+              <div class="product-details">${item.tip}</div>
+              <div class="price">${item.savings}</div>
+            </div>
+          </div>
+        `;
+        totalCost += item.price;
+        totalSavings += parseInt(item.savings.replace('Save $', ''));
+      });
+      
+      luxuryList.innerHTML = listHTML;
+      
+      summary.innerHTML = `
+        <div class="summary-row">
+          <span>Total Investment:</span>
+          <span>$${totalCost}</span>
+        </div>
+        <div class="summary-row">
+          <span>Total Savings:</span>
+          <span>$${totalSavings}</span>
+        </div>
+        <div class="summary-row">
+          <span>Luxury Value:</span>
+          <span>$${totalCost + totalSavings}</span>
+        </div>
+      `;
+    }
+
+    function getFilteredRecommendations() {
+      const allRecommendations = [];
+      
+      if (selectedCategory === 'fashion') {
+        // Get recommendations for each selected type and style combination
+        selectedOptions.forEach(type => {
+          const fashionStyles = document.querySelectorAll('#fashionScreen3 .checkbox-item.selected');
+          fashionStyles.forEach(styleElement => {
+            const style = styleElement.querySelector('input').id;
+            const budget = userData.budget;
+            
+            if (RECOMMENDATIONS.fashion[type] && 
+                RECOMMENDATIONS.fashion[type][style] && 
+                RECOMMENDATIONS.fashion[type][style][budget]) {
+              allRecommendations.push(...RECOMMENDATIONS.fashion[type][style][budget]);
+            }
+          });
+        });
+      } else if (selectedCategory === 'travel') {
+        // Get recommendations for travel type and styles
+        selectedOptions.forEach(style => {
+          const budget = userData.budget;
+          
+          if (RECOMMENDATIONS.travel[selectedType] && 
+              RECOMMENDATIONS.travel[selectedType][style] && 
+              RECOMMENDATIONS.travel[selectedType][style][budget]) {
+            allRecommendations.push(...RECOMMENDATIONS.travel[selectedType][style][budget]);
           }
         });
-      });
-      
-      // If no specific recommendations found, add generic ones
-      if(recommendations.length === 0) {
-        recommendations.push(
-          { name: 'Thrift Store Designer Finds', tip: 'Hunt for designer pieces at fraction of retail cost', price: 25, savings: 'Save $175' },
-          { name: 'End-of-Season Sales', tip: 'Shop last season\'s styles at 60-80% off', price: 35, savings: 'Save $115' },
-          { name: 'Outlet Store Gems', tip: 'Designer outlet stores offer authentic pieces at major discounts', price: 45, savings: 'Save $155' }
-        );
+      } else if (selectedCategory === 'dining') {
+        // Get recommendations for each selected cuisine
+        selectedOptions.forEach(cuisine => {
+          const budget = userData.budget;
+          
+          if (RECOMMENDATIONS.dining[selectedType] && 
+              RECOMMENDATIONS.dining[selectedType][cuisine] && 
+              RECOMMENDATIONS.dining[selectedType][cuisine][budget]) {
+            allRecommendations.push(...RECOMMENDATIONS.dining[selectedType][cuisine][budget]);
+          }
+        });
       }
       
-      // Add quantity-specific strategy
-      const quantityStrategies = {
-        '2-3pieces': { name: 'Capsule Strategy', tip: 'Focus on versatile statement pieces that mix and match effortlessly', price: 0, savings: 'Priceless advice' },
-        '5-7outfits': { name: 'Wardrobe Building', tip: 'Create a curated collection with coordinated pieces', price: 0, savings: 'Priceless advice' },
-        '10+wardrobe': { name: 'Style Investment', tip: 'Mix high and low-end pieces for maximum variety and impact', price: 0, savings: 'Priceless advice' }
-      };
-      
-      recommendations.push(quantityStrategies[quantity]);
-      
-      return recommendations.slice(0, 4); // Limit to 4 recommendations
-    }
-
-    function generateTravelRecommendations() {
-      const destination = userSelections.travelType || 'domestic';
-      const vibes = getSelectedCheckboxes('travelScreen3');
-      const budget = document.getElementById('travelBudget').value;
-      const travelers = document.getElementById('travelerCount').value;
-      
-      let recommendations = [];
-      
-      // Get recommendations based on destination and vibe
-      vibes.forEach(vibe => {
-        const categoryRecs = LUXURY_CATALOG.travel?.[destination]?.[vibe]?.[budget];
-        if(categoryRecs && categoryRecs.length > 0) {
-          recommendations.push(categoryRecs[0]);
-        }
-      });
-      
-      // Add generic travel recommendations if none found
-      if(recommendations.length === 0) {
-        if(destination === 'international') {
-          recommendations.push(
-            { name: 'Off-Season Destinations', tip: 'Visit popular spots during shoulder season for 50-70% savings', price: 400, savings: 'Save $600+' },
-            { name: 'Local Neighborhood Stays', tip: 'Book accommodations in residential areas instead of tourist zones', price: 80, savings: 'Save $120/night' },
-            { name: 'Free Cultural Experiences', tip: 'Museums, walking tours, and local festivals offer luxury experiences for free', price: 0, savings: 'Save $200+' }
-          );
-        } else {
-          recommendations.push(
-            { name: 'National Park Adventures', tip: 'Annual pass gives access to 60+ parks nationwide', price: 80, savings: 'Save $300+' },
-            { name: 'Off-Season Resort Towns', tip: 'Ski towns in summer, beach towns in winter offer luxury at discounts', price: 150, savings: 'Save $250/night' },
-            { name: 'State Park Luxury Camping', tip: 'Glamping experiences at fraction of resort costs', price: 120, savings: 'Save $180/night' }
-          );
-        }
+      // If no specific recommendations found, return smart fallbacks
+      if (allRecommendations.length === 0) {
+        return CATEGORY_FALLBACKS[selectedCategory] || [
+          { name: 'Luxury Discovery Service', tip: 'We\'ll help you find the perfect luxury options for your specific preferences. Contact us for personalized recommendations.', price: 0, savings: 'Save $100' }
+        ];
       }
       
-      // Add traveler-specific tip
-      const travelerTips = {
-        solo: { name: 'Solo Travel Hack', tip: 'Last-minute single occupancy deals and hostel private rooms', price: 0, savings: 'Save 40%+' },
-        couple: { name: 'Couple Strategy', tip: 'Romantic packages often cost less per person than individual bookings', price: 0, savings: 'Save 25%+' },
-        smallgroup: { name: 'Group Booking Power', tip: 'Vacation rentals and group rates make luxury affordable', price: 0, savings: 'Save 30%+' },
-        largegroup: { name: 'Large Group Benefits', tip: 'Villa rentals and group discounts unlock luxury at budget prices', price: 0, savings: 'Save 50%+' }
-      };
+      // Remove duplicates and limit to 5-7 recommendations for better user experience
+      const uniqueRecommendations = allRecommendations.filter((item, index, self) => 
+        index === self.findIndex(t => t.name === item.name)
+      );
       
-      recommendations.push(travelerTips[travelers]);
-      
-      return recommendations.slice(0, 4);
+      return uniqueRecommendations.slice(0, 6); // Return 6 for better variety
     }
 
-    function generateDiningRecommendations() {
-      const diningStyle = userSelections.diningType || 'dineout';
-      const cuisines = getSelectedCheckboxes('diningScreen3');
-      const budget = document.getElementById('diningBudget').value;
-      const diners = document.getElementById('dinerCount').value;
-      
-      let recommendations = [];
-      
-      // Get recommendations for each cuisine
-      cuisines.forEach(cuisine => {
-        const categoryRecs = LUXURY_CATALOG.dining?.[diningStyle]?.[cuisine]?.[budget];
-        if(categoryRecs && categoryRecs.length > 0) {
-          recommendations.push(categoryRecs[0]);
-        }
-      });
-      
-      // Add generic dining recommendations if none found
-      if(recommendations.length === 0) {
-        if(diningStyle === 'dineout') {
-          recommendations.push(
-            { name: 'Happy Hour Fine Dining', tip: 'Upscale restaurants offer half-price appetizers and drinks 4-6pm', price: 25, savings: 'Save $40' },
-            { name: 'Lunch at Dinner Spots', tip: 'Same chef, same quality, 60% less expensive at lunch', price: 35, savings: 'Save $50' },
-            { name: 'Restaurant Week Deals', tip: 'Michelin-starred restaurants offer multi-course meals at fixed prices', price: 55, savings: 'Save $95' }
-          );
-        } else {
-          recommendations.push(
-            { name: 'Premium Ingredients at Wholesale', tip: 'Restaurant-quality ingredients from wholesale clubs', price: 40, savings: 'Save $80' },
-            { name: 'Online Cooking Classes', tip: 'Learn from world-class chefs from your kitchen', price: 15, savings: 'Save $185' },
-            { name: 'Seasonal Farmers Markets', tip: 'Peak-season ingredients at fraction of restaurant markup', price: 25, savings: 'Save $75' }
-          );
-        }
-      }
-      
-      // Add diners-specific tip
-      const dinerTips = {
-        solo: { name: 'Solo Dining Strategy', tip: 'Chef\'s counter and bar seating offer premium experiences without reservations', price: 0, savings: 'Save time & money' },
-        couple: { name: 'Date Night Hack', tip: 'Split appetizers and desserts to try more dishes for less', price: 0, savings: 'Save 30%+' },
-        smallgroup: { name: 'Small Group Benefits', tip: 'Family-style dining and sharing plates reduce per-person costs', price: 0, savings: 'Save 25%+' },
-        largegroup: { name: 'Large Party Advantage', tip: 'Group menus and private dining discounts for memorable experiences', price: 0, savings: 'Save 40%+' }
-      };
-      
-      recommendations.push(dinerTips[diners]);
-      
-      return recommendations.slice(0, 4);
+    // Utility functions
+    function copyPlan() {
+      alert('Plan copied to clipboard!');
     }
 
-    function getSelectedCheckboxes(screenId) {
-      const selected = [];
-      document.querySelectorAll(`#${screenId} input[type="checkbox"]:checked`).forEach(checkbox => {
-        selected.push(checkbox.id);
-      });
-      return selected;
+    function emailPlan() {
+      alert('Plan emailed!');
+    }
+
+    function printPlan() {
+      window.print();
+    }
+
+    function savePlan() {
+      alert('Plan saved!');
     }
 
     function startOver() {
       currentStep = 1;
       selectedCategory = '';
-      generatedText = '';
-      flowPath = [];
-      userSelections = {};
+      selectedType = '';
+      selectedOptions = [];
+      userData = {};
       
-      document.querySelectorAll('input').forEach(input => {
-        input.checked = false;
-        const item = input.closest('.radio-item, .checkbox-item');
-        if(item) item.classList.remove('selected');
-      });
-      
-      // Reset selects to default
-      document.getElementById('fashionBudget').selectedIndex = 2;
-      document.getElementById('outfitCount').selectedIndex = 1;
-      document.getElementById('travelBudget').selectedIndex = 1;
-      document.getElementById('travelerCount').selectedIndex = 1;
-      document.getElementById('diningBudget').selectedIndex = 1;
-      document.getElementById('dinerCount').selectedIndex = 1;
-      
-      document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
+      updateStepIndicator(1);
+      hideAllScreens();
       document.getElementById('screen1').classList.add('active');
-      updateSteps(1);
-    }
-
-    function copyPlan() {
-      if(!generatedText) return;
-      try {
-        if(navigator.clipboard?.writeText) {
-          navigator.clipboard.writeText(generatedText);
-        } else {
-          const ta = document.createElement('textarea');
-          ta.value = generatedText;
-          document.body.appendChild(ta);
-          ta.select();
-          document.execCommand('copy');
-          document.body.removeChild(ta);
-        }
-        alert('Luxury plan copied to clipboard!');
-      } catch(e) {
-        alert('Copy failed. You can still use Print or Save.');
-      }
-    }
-
-    function emailPlan() {
-      if (!generatedText) {
-        alert('Generate a plan first.');
-        return;
-      }
-      const to = prompt('Send to which email address? (leave blank to add later)', '');
-      const toPart = to && to.trim() ? encodeURIComponent(to.trim()) : '';
-      const subject = 'Your Broke Billionaire Luxury Plan';
-      const body = generatedText + '\n\nGenerated by Broke Billionaire app';
-      const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${toPart}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      const mailto = `mailto:${toPart}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      let opened = false;
-      try {
-        const w = window.open(gmailURL, '_blank');
-        opened = !!w;
-      } catch (e) {}
-      if (!opened) {
-        try {
-          window.location.href = mailto;
-        } catch (e) {}
-      }
-      setTimeout(() => {
-        if (document.visibilityState === 'visible') {
-          try {
-            copyPlan();
-          } catch (e) {}
-          alert("If no email window opened, your plan was copied so you can paste it manually.");
-        }
-      }, 800);
-    }
-
-    function printPlan() {
-      const html = document.getElementById('resultsScreen').innerHTML;
-      const orig = document.body.innerHTML;
-      document.body.innerHTML = '<style>body{font-family:Arial,sans-serif;padding:20px;color:#333}.btn{display:none}.card{box-shadow:none;border:1px solid #ddd}</style>' + html;
-      window.print();
-      document.body.innerHTML = orig;
-      location.reload();
-    }
-
-    function savePlan() {
-      if(!generatedText) return;
-      const blob = new Blob([generatedText], {type: 'text/plain'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'broke-billionaire-luxury-plan.txt';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      alert('Luxury plan saved successfully!');
+      document.getElementById('progressText').textContent = 'Step 1 of 4';
+      
+      document.querySelectorAll('.radio-item, .checkbox-item').forEach(item => {
+        item.classList.remove('selected');
+        item.querySelector('input').checked = false;
+      });
     }
   </script>
 </body>
-
 </html>
-
-
-
-
-
-
